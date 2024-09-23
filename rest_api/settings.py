@@ -18,6 +18,7 @@ ALLOWED_HOSTS = []
 RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
 if RENDER_EXTERNAL_HOSTNAME:
     ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
+    ALLOWED_HOSTS.append("nextjs-blog-todos-snowy-sigma.vercel.app")
 
 
 # Application definition
@@ -46,7 +47,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 CORS_ORIGIN_WHITELIST = [
-    "http://localhost:3000", 
+    "http://localhost:3000",
     "https://nextjs-blog-todos-snowy-sigma.vercel.app",
 ]
 SIMPLE_JWT = {
