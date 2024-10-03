@@ -7,13 +7,16 @@ from .models import Task, Post
 # ★新規ユーザーの作成
 class CreateUserView(generics.CreateAPIView):
     serializer_class = UserSerializer
+    # JWTトークンを採用しているため、登録されているユーザーのみエンドポイントにアクセスできるようにしているが、
+    # 新規ユーザーはどこもアクセスできなくなってしまうため、新規ユーザーを作成する段階ではだれでも認証されるように設定しておく
     permission_classes = (AllowAny,)
 
 class PostListView(generics.ListAPIView):
-    queryset = Post.objects.all()
+    queryset = Post.objects.all() #Postモデルに入っているすべての内容をquerysetに代入する。
     serializer_class = PostSerializer
     permission_classes = (AllowAny,)
 
+# 特定の1つのタスクのみ取得する
 class PostRetrieveView(generics.RetrieveAPIView):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
@@ -32,6 +35,6 @@ class TaskRetrieveView(generics.RetrieveAPIView):
     permission_classes = (AllowAny,)
 
 
-class TaskViewSet(viewsets.ModelViewSet):
+class TaskViewSet(viewsets.ModelViewSet): #ModelViewSetを使用するとcrud機能(create,update,delete)がすべて使える。
     queryset = Task.objects.all()
     serializer_class = TaskSerializer
